@@ -7,3 +7,17 @@ before_install:
 
 script:
   - docker run afra91/ci-docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "ci-docker-react"
+  env: "CiDockerReact-env"
+  bucket_name: "elasticbeanstalk-us-east-1-417237871130"
+  bucket_path: "ci-docker-react"
+  on:
+    branch: master
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
